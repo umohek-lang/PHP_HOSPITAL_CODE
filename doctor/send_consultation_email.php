@@ -1,3 +1,9 @@
+$dotenv = parse_ini_file(__DIR__ . '/.env');
+foreach ($dotenv as $key => $value) {
+    putenv("$key=$value");
+}
+
+
 <?php 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -15,7 +21,7 @@ if (!isset($_SESSION['user']['role_id']) || $_SESSION['user']['role_id'] != 2) {
 
 // ✅ Accept GET request with patient_id
 if (!isset($_GET['patient_id'])) {
-    die("❌ Patient ID not provided.");
+    die(" Patient ID not provided.");
 }
 
 $patient_id = $_GET['patient_id'];
@@ -81,17 +87,29 @@ $pdf->Output($pdfPath, 'F');
 $mail = new PHPMailer(true);
 
 try {
-    $mail->isSMTP();
-    $mail->Host = 'mail.excellentgrade.ng';
-    $mail->SMTPAuth = true;
-    $mail->Username = 'noreply@excellentgrade.ng';
-    $mail->Password = 'ExcellentGradeInternationalSchool@12';
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port = 587;
+    // $mail->isSMTP();
+    // $mail->Host = 'mail.excellentgrade.ng';
+    // $mail->SMTPAuth = true;
+    // $mail->Username = 'noreply@excellentgrade.ng';
+    // $mail->Password = 'ExcellentGradeInternationalSchool@12';
+    // $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    // $mail->Port = 587;
 
-    $mail->setFrom('noreply@excellentgrade.ng', 'Excellent Grade Medical Lab');
-    $mail->addAddress($patient['email'], $patient['full_name']);
-    $mail->addReplyTo('info@excellentgrade.ng', 'Lab Info');
+    // $mail->setFrom('noreply@excellentgrade.ng', 'Excellent Grade Medical Lab');
+    // $mail->addAddress($patient['email'], $patient['full_name']);
+    // $mail->addReplyTo('info@excellentgrade.ng', 'Lab Info');
+
+$mail->isSMTP();
+$mail->Host = getenv('SMTP_HOST');
+$mail->SMTPAuth = true;
+$mail->Username = getenv('SMTP_USER');
+$mail->Password = getenv('SMTP_PASS');
+$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+$mail->Port = getenv('SMTP_PORT');
+
+$mail->setFrom('noreply@excellentgrade.ng', 'Excellent Grade Medical Lab');
+$mail->addAddress($patient['email'], $patient['full_name']);
+$mail->addReplyTo('info@excellentgrade.ng', 'Lab Info');
 
     // Embed logo if exists
     $logoPath = __DIR__ . '/logo.png';
