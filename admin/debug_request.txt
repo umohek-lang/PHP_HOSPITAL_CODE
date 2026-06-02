@@ -1,0 +1,18 @@
+Array
+(
+    [csrf_token] => fd44e1aacdd7a9365e212ca97d987edf5285af506f9786ddb8d93894b353d03e
+    [hmo_verified] => 0
+    [full_name] => sir
+    [gender] => Female
+    [dob] => 1994-06-06
+    [age] => 31
+    [phone] => 08134948430
+    [email] => sir@gmail.com
+    [language] => uko
+    [address] => uuiiii
+    [marital_status] => Married
+    [patient_type] => Regular
+    [patient_status] => Outpatient
+    [registered_by] => 131
+    [hmo_name] => 
+)

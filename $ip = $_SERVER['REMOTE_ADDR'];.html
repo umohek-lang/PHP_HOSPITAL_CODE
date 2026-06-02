@@ -1,0 +1,38 @@
+$ip = $_SERVER['REMOTE_ADDR'];
+$user_agent = $_SERVER['HTTP_USER_AGENT'];
+$now = date('Y-m-d H:i:s');
+
+$user_id = $user['user_id'] ?? null;
+$full_name = $user['full_name'] ?? 'Unknown';
+$role_id = $user['role_id'] ?? null;
+
+$log = $pdo->prepare("INSERT INTO login_activity (user_id, full_name, role_id, email, login_time, status, ip_address, user_agent)
+                      VALUES (?, ?, ?, ?, ?, 'failed', ?, ?)");
+$log->execute([
+    $user_id,
+    $full_name,
+    $role_id,
+    $email,
+    $now,
+    $ip,
+    $user_agent
+]);
+
+
+
+// ✅ Step 2A: Log successful login
+$ip = $_SERVER['REMOTE_ADDR'];
+$user_agent = $_SERVER['HTTP_USER_AGENT'];
+$login_time = date('Y-m-d H:i:s');
+
+$log = $pdo->prepare("INSERT INTO login_activity (user_id, full_name, role_id, email, login_time, status, login_state, ip_address, user_agent)
+                      VALUES (?, ?, ?, ?, ?, 'success', 'Online', ?, ?)");
+$log->execute([
+    $user['user_id'],
+    $user['full_name'],
+    $user['role_id'],
+    $user['email'],
+    $login_time,
+    $ip,
+    $user_agent
+]);

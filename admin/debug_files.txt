@@ -1,0 +1,13 @@
+Array
+(
+    [photo] => Array
+        (
+            [name] => Untitled.png
+            [full_path] => Untitled.png
+            [type] => image/png
+            [tmp_name] => /tmp/phpSdGmyK
+            [error] => 0
+            [size] => 5268
+        )
+
+)

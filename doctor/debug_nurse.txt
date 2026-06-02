@@ -1,0 +1,10 @@
+Array
+(
+    [patient_id] => 165
+    [chief_complaint] => 
+    [physical_exam] => 
+    [diagnosis] => 
+    [investigations] => 
+    [procedure_order] => IV Fluids
+    [nursing_notes] => Umoh 
+)
